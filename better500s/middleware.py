@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseServerError, HttpResponseNotFound, Http404
 from django.template import Context
 from django.template.loader import render_to_string
-from django.utils.encoding import smart_unicode
+from django.utils.encoding import smart_text
 from django.views.debug import technical_500_response
 
 from better500s import (BETTER_500_LOG_DIR, BETTER_500_UNCAUGHT_DIR,
@@ -66,7 +66,7 @@ class Better500s(object):
                 context['ajax_url'] = reverse(BETTER_500_AJAX_URL)
                 context['post_url'] = reverse(BETTER_500_POST_URL)
                 try:
-                    exception_value = smart_unicode(exc_info[1])
+                    exception_value = smart_text(exc_info[1])
                     if exception_value != u"":
                         context['exception_value'] = exception_value
                 except:
